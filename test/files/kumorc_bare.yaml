@@ -1,0 +1,5 @@
+---
+:sets:
+  :default:
+    :access-key-id: 'xxxxx'
+    :secret-access-key: 'xxxxx'

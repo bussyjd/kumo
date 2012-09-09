@@ -1,0 +1,46 @@
+---
+:sets:
+  :default:
+    :access-key-id: 'xxxxx'
+    :secret-access-key: 'xxxxx'
+    :keypair: 'default'
+    :region: 'us-east-1'
+    :type-id: 't1.micro'
+    :image-id: 'ami-a29943cb'   # Ubuntu 12.04
+    :groups:
+    - 'kumo'
+    :tag: 'kumotest'   # 255 chars, case-sensitive, 10 keys
+
+  :foo:
+    :access-key-id: 'xxxxxx'
+    :secret-access-key: 'xxxxx'
+    :keypair: 'foo'
+  
+  :scratch:
+    :image-id: 'ami-a29943cb'   # Ubuntu 12.04
+    :type-id: 'm1.small'
+    :tag: 'scratch'
+
+  :kumo:
+    :image-id: 'ami-a29943cb'   # Ubuntu 12.04
+    :type-id: 'm1.micro'
+    :groups:
+    - 'kumo'
+    :tag: 'kumo'
+  
+  :pair:
+    :keypair: 'pairprogramming'
+    :type-id: 'm1.small'
+    :tag: 'pair'
+
+  :micro:
+    :type-id: 't1.micro'
+  
+  :small:
+    :type-id: 'm1.small'
+  
+  :medium:
+    :type-id: 'm1.medium'
+  
+  :large:
+    :type-id: 'm1.large'

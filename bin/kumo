@@ -1,0 +1,135 @@
+#!/usr/bin/env ruby
+require 'gli'
+require 'kumo'
+require 'kumo/commands'
+
+include GLI::App
+version Kumo::VERSION
+
+if ARGV[0] == '--version'
+  puts Kumo::VERSION
+  exit
+end
+
+program_desc 'Manage workspaces in EC2'
+
+desc 'config file path'
+arg_name 'PATH'
+default_value '~/.kumorc'
+flag [:c, :'config-file']
+
+desc 'List instances in a set'
+command :list do |c|
+  c.desc 'keypair'
+  c.flag [:keypair]
+  c.desc 'region'
+  c.flag [:region]
+  c.desc 'type id'
+  c.flag [:'type-id']
+  c.desc 'AMI'
+  c.flag [:'image-id']
+  c.desc 'name tag'
+  c.flag [:t, :tag]
+  c.desc 'configuration sets'
+  c.arg_name 'SET1,SET2,...'
+  c.flag [:s, :sets]
+  c.action do |global_options, options, args|
+    Kumo::Commands.list(global_options, options, args)
+  end
+end
+
+desc 'Launch an instance'
+command :launch do |c|
+  c.desc 'keypair'
+  c.flag [:keypair]
+  c.desc 'region'
+  c.flag [:region]
+  c.desc 'type id'
+  c.flag [:'type-id']
+  c.desc 'AMI'
+  c.flag [:'image-id']
+  c.desc 'name tag'
+  c.flag [:t, :tag]
+  c.desc 'configuration sets'
+  c.arg_name 'SET1,SET2,...'
+  c.flag [:s, :sets]
+  c.desc 'security groups'
+  c.arg_name 'GROUP1,GROUP2,...'
+  c.flag [:g, :groups]
+  c.action do |global_options, options, args|
+    Kumo::Commands.launch(global_options, options, args)
+  end
+end
+
+desc 'Terminate an instance'
+arg_name '[INSTANCE_ID]'
+command :terminate do |c|
+  c.desc 'region'
+  c.flag [:region]
+  c.desc 'name tag'
+  c.flag [:t, :tag]
+  c.desc 'configuration sets'
+  c.arg_name 'SET1,SET2,...'
+  c.flag [:s, :sets]
+  c.action do |global_options,options,args|
+    Kumo::Commands.terminate(global_options, options, args)
+  end
+end
+
+desc 'Start an instance'
+arg_name '[INSTANCE_ID]'
+command :start do |c|
+  c.desc 'region'
+  c.flag [:region]
+  c.desc 'name tag'
+  c.flag [:t, :tag]
+  c.desc 'configuration sets'
+  c.arg_name 'SET1,SET2,...'
+  c.flag [:s, :sets]
+  c.action do |global_options, options, args|
+    Kumo::Commands.start(global_options, options, args)
+  end
+end
+
+desc 'Stop an instance'
+arg_name '[INSTANCE_ID]'
+command :stop do |c|
+  c.desc 'region'
+  c.flag [:region]
+  c.desc 'name tag'
+  c.flag [:t, :tag]
+  c.desc 'configuration sets'
+  c.arg_name 'SET1,SET2,...'
+  c.flag [:s, :sets]
+  c.action do |global_options, options, args|
+    Kumo::Commands.stop(global_options, options, args)
+  end
+end
+
+desc 'DNS of an instance'
+arg_name '[INSTANCE_ID]'
+command :dns do |c|
+  c.desc 'region'
+  c.flag [:region]
+  c.desc 'name tag'
+  c.flag [:t, :tag]
+  c.desc 'configuration sets'
+  c.arg_name 'SET1,SET2,...'
+  c.flag [:s, :sets]
+  c.action do |global_options, options, args|
+    Kumo::Commands.dns(global_options, options, args)
+  end
+end
+
+pre do |global, command, options, args|
+  true
+end
+
+post do |global, command, options, args|
+end
+
+on_error do |exception|
+  true
+end
+
+exit run(ARGV)
