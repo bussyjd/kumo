@@ -2,11 +2,39 @@
 
 ## Overview
 
-Manage workspaces in EC2
+The goal of kumo is to make it easy to launch instances in EC2 for
+temporary purposes. For example, you could launch an instance to try
+out a new Rails configuration, run a Puppet configuration, or pair
+program.
 
-## Configuration File
+## Stack Metaphore
 
-    # ~/.kumorc
+Kumo works like a stack. It performs commands on the last instance
+launched unless otherwise specified.
+
+## Sets
+
+Kumo helps you type less by leveraging sets.
+
+## Example: Quick Instance
+
+Kumo is expecting a configuration file, which contains your EC2 Access
+Key ID and Secret Access Key. By default, kumo will look for the
+configuration file at `~/.kumorc`. The minimum expected configuration
+file looks like the following:
+
+    ---
+    :sets:
+      :default:
+        :access-key-id: 'xxxxx'
+        :secret-access-key: 'xxxxx'
+
+
+## Example: Pair Programming
+
+
+## Example Configuration File
+
     ---
     :sets:
       :default:
